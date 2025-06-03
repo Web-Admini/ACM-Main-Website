@@ -108,9 +108,12 @@ class Navi extends React.Component {
                 <NavDropdown.Item href="/projects">
                   <div className="nav-dropdown-text">project workshops</div>
                 </NavDropdown.Item>
+
+                
                 <NavDropdown.Item href="/programs">
-                  <div className="nav-dropdown-text">pro-dev</div>
+                  <div className="nav-dropdown-text">code cracking</div>
                 </NavDropdown.Item>
+
                 <NavDropdown.Item href="/professional">
                   <div className="nav-dropdown-text">events</div>
                 </NavDropdown.Item>
@@ -176,10 +179,9 @@ class Navi extends React.Component {
             {/* <Nav.Link href="https://calstatelaacm-portal.web.app/#/"><Button variant="light">ACM Portal</Button></Nav.Link> */}
           </Navbar.Collapse>
         </Navbar>
+        <div class="hover-announcements-background"></div>
         <div class="hover-announcements">
-          Welcome to Fall 2023! Don't miss on this opportunity! Meet up with ACM leaders and build your network
-          at ACM's First General Meeting on Tuesday, August 29th at
-          (room_number).
+          Welcome back CSULA students! Come by at our First General Meeting on February 6th at Room FA219 to kickstart our upcoming ACM events for Spring 2024!
         </div>
       </>
     );

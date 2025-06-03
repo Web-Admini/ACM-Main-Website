@@ -1,122 +1,141 @@
 import React, { Component } from "react";
-import firebase from "../../professional-events/firebaseConfig.js";
+import { useState, useEffect } from "react";
+import { db } from "../../professional-events/firebaseConfig";
+import {
+  getFirestore,
+  collection,
+  collectionGroup,
+  getDocs,
+} from "firebase/firestore";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import { Carousel } from "react-responsive-carousel";
 
 import "./impAnnouncements.scss";
 
-class ImpAnnouncements extends Component {
-  state = {
-    upcomingEvent: null,
-  };
+const ImpAnnouncements = () => {
+  const [upcomingEvent, setUpcoming] = useState(null);
+  const [featuredEvent, setFeatured] = useState(null);
 
-  componentDidMount() {
-    firebase
-      .firestore()
-      .collection("upcomingEvents")
-      .get()
-      .then((snapshot) => {
+  useEffect(() => {
+    (async () => {
+      try {
+        const upcomingEvents = collectionGroup(db, "upcomingEvents");
+        const queryUpcoming = await getDocs(upcomingEvents);
+        const comingUpEvents = [];
+        queryUpcoming.forEach((doc) => {
+          const data = doc.data();
+          comingUpEvents.push(data);
+        });
+        setUpcoming(comingUpEvents);
+
+        const featuredEvents = collectionGroup(db, "featuredEvent");
+        const queryFeaturedEvents = await getDocs(featuredEvents);
         const events = [];
-        snapshot.forEach((doc) => {
+        queryFeaturedEvents.forEach((doc) => {
           const data = doc.data();
           events.push(data);
         });
-        this.setState({ upcomingEvent: events });
-      })
-      .catch((error) => console.log(error));
-  }
+        setFeatured(events);
+      } catch (err) {
+        console.log("Error occured when fetching events");
+      }
+    })();
+  }, []);
 
-  render() {
-    let eventPosters = [
-      "./images/spring2023-pro-dev.png",
-    ];
+    // firebase
+    //   .firestore()
+    //   .collection("upcomingEvents")
+    //   .get()
+    //   .then((snapshot) => {
+    //     const events = [];
+    //     snapshot.forEach((doc) => {
+    //       const data = doc.data();
+    //       events.push(data);
+    //     });
+    //     setUpcoming(events);
+    //   })
+    //   .catch((error) => console.log(error));
+    // firebase
+    //   .firestore()
+    //   .collection("featuredEvent")
+    //   .get()
+    //   .then((snapshot) => {
+    //     const events = [];
+    //     snapshot.forEach((doc) => {
+    //       const data = doc.data();
+    //       events.push(data);
+    //     });
+    //     setFeatured(events);
+    //   })
+    //   .catch((error) => console.log(error));
 
-    let links = [
-      "https://forms.gle/hAjvNSbS47ghMxuE8",
-    ];
+  let links = ["https://forms.gle/hAjvNSbS47ghMxuE8"];
 
-    return (
-      <section className="impAnnouncements-tease">
-        <div className="content">
-          <div className="title mt-4 mb-5">Academic Year 2022-2023</div>
-          <div className="video-header">
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/6E9kewdhFvU"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-          <div className="description border-bottom mt-3">
-            <p>
-              Communications will be done via email, Discord, and social media
-            </p>
-          </div>
-          <br></br>
+  return (
+    <section className="impAnnouncements-tease">
+      <div className="content">
+        <div className="title mt-4 mb-5">Academic Year 2023-2024</div>
+        <div className="video-header">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/QORLZ94PzVk"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
+        <div className="description mt-3">
+          <p>
+            Communications will be done via email, Discord, and social media
+          </p>
+        </div>
+        <br></br>
 
-          <Row id="event-container">
-            <Col md={6} id="upcoming-flyer" class="text-center">
-              <div className="event-section">
-                <h1 className="upcoming-title">Upcoming events</h1>
-                <p className="event-description">
-                  Don't miss out on these events! See our
-                  <br />
-                  calendar for more details.
-                </p>
-                <Carousel infiniteLoop className="flyer-container">
-                  {this.state.upcomingEvent &&
-                    this.state.upcomingEvent.map((upComingEvents) => {
-                      return (
-                        <div>
-                          <img
-                            className="carousel-event-image"
-                            src={upComingEvents.imgUrl}
-                            alt={upComingEvents.altText}
-                          />
-                        </div>
-                      );
-                    })}
-                </Carousel>
-              </div>
-            </Col>
-            <Col md={6} id="featured-flyer" class="text-center">
-              <div className="event-section">
-                <h1 className="featured-title">Featured Events</h1>
-                <p className="event-description">
-                  Stay tuned for Fall 2023
-                </p>
-                {/*
-                <Carousel infiniteLoop className="flyer-container">
-                  {eventPosters.map((value, index) => {
+        <Row id="event-container">
+          <Col md={6} id="upcoming-flyer" class="text-center">
+            <div className="event-section">
+              <h1 className="upcoming-title">Upcoming events</h1>
+              <Carousel className="flyer-container">
+                {upcomingEvent &&
+                  upcomingEvent.map((upComingEvents) => {
                     return (
                       <div>
                         <img
                           className="carousel-event-image"
-                          src={require("" + value)}
-                          alt="event"
+                          src={upComingEvents.imgUrl}
+                          alt={upComingEvents.altText}
                         />
-                        <Button
-                          href={links[index]}
-                          style={{ backgroundColor: "#0A84FF" }}
-                        >
-                          Apply Now!
-                        </Button>
                       </div>
                     );
                   })}
-                </Carousel>
-                */}
-                
-              </div>
-            </Col>
-          </Row>
-        </div>
-      </section>
-    );
-  }
-}
+              </Carousel>
+            </div>
+          </Col>
+          <Col md={6} id="featured-flyer" class="text-center">
+            <div className="event-section">
+              <h1 className="featured-title">Featured Events</h1>
+              <Carousel className="flyer-container">
+                {featuredEvent &&
+                  featuredEvent.map((event) => {
+                    return (
+                      <div>
+                        <img
+                          className="carousel-event-image"
+                          src={event.imgUrl}
+                          alt={event.altText}
+                        />
+                      </div>
+                    );
+                  })}
+              </Carousel>
+            </div>
+          </Col>
+        </Row>
+      </div>
+    </section>
+  );
+};
 
 export default ImpAnnouncements;

@@ -3,6 +3,7 @@ import { Row, Col, Tab, Dropdown, DropdownButton } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import "./board.css";
 import firebase from "../professional-events/firebaseConfig.js";
+
 import BoardLeaders from "./BoardLeaders";
 import backdrop from "./img/bluebackdrop.jpg";
 
@@ -35,7 +36,7 @@ class Board extends React.Component {
       <div>
         <div className="board-header-container">
           <div id="board-header-title">
-            The team that makes ACM special at CSULA...
+            The team that makes ACM special at CalStateLA...
             <br></br>
             Meet our leaders!
           </div>

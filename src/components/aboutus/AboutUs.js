@@ -7,6 +7,11 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 // import { Carousel } from "react-responsive-carousel";
 import { AnimationOnScroll } from "react-animation-on-scroll";
 import "./aboutus.css";
+import constitution from "./images/2023-2024 Constitution.pdf"
+import FallBoard from "./images/Fall2023Board.png"
+import AndroidWorkshop from "./images/android-workshop.png"
+import FallGeneralMeeting from "./images/fall-2019-general-meeting.jpg"
+import ConstitutionLogo from "./images/logo.png"
 
 class AboutUs extends React.Component {
   render() {
@@ -71,7 +76,7 @@ class AboutUs extends React.Component {
                     our mentorship program.
                   </li>
                 </AnimationOnScroll>
-
+          
                 <AnimationOnScroll
                   animateIn="animate__fadeIn"
                   delay="1"
@@ -121,7 +126,7 @@ class AboutUs extends React.Component {
         <div className="bottom-section">
           <div id="about-us-info">
             <Accordion>
-              <Card>
+              <Card className="aboutme-card">
                 <Accordion.Toggle
                   className="accordian-container"
                   as={Card.Header}
@@ -136,7 +141,7 @@ class AboutUs extends React.Component {
                 </Accordion.Toggle>
 
                 <Accordion.Collapse eventKey="0">
-                  <Card.Body>
+                  <Card.Body className="about-card">
                     <Row className="info-row">
                       <Col className="info-col" lg={6}>
                         <div className="info-content-container">
@@ -165,7 +170,7 @@ class AboutUs extends React.Component {
                       </Col>
                       <Col className="about-us-image" lg={5}>
                         <Image
-                          src={require("./images/Fall2022Board.jpg")}
+                          src= {FallBoard} alt = "Fall 2023 Board Photo"
                           fluid
                         />
                       </Col>
@@ -174,7 +179,7 @@ class AboutUs extends React.Component {
                 </Accordion.Collapse>
               </Card>
 
-              <Card>
+              <Card className="aboutme-card">
                 <Accordion.Toggle
                   className="accordian-container"
                   as={Card.Header}
@@ -188,7 +193,7 @@ class AboutUs extends React.Component {
                 </Accordion.Toggle>
 
                 <Accordion.Collapse eventKey="1">
-                  <Card.Body>
+                  <Card.Body className="about-card">
                     <Row className="info-row">
                       <Col className="info-col" lg={6}>
                         <div className="info-content-container">
@@ -213,7 +218,7 @@ class AboutUs extends React.Component {
                       </Col>
                       <Col className="about-us-image" lg={5}>
                         <Image
-                          src={require("./images/android-workshop.png")}
+                          src={AndroidWorkshop} alt = " Android Workshop Photo"
                           fluid
                         />
                       </Col>
@@ -222,7 +227,7 @@ class AboutUs extends React.Component {
                 </Accordion.Collapse>
               </Card>
 
-              <Card>
+              <Card className="aboutme-card">
                 <Accordion.Toggle
                   className="accordian-container"
                   as={Card.Header}
@@ -236,7 +241,7 @@ class AboutUs extends React.Component {
                 </Accordion.Toggle>
 
                 <Accordion.Collapse eventKey="2">
-                  <Card.Body>
+                  <Card.Body className="about-card">
                     <Row className="info-row">
                       <Col className="info-col" lg={6}>
                         <div className="info-content-container">
@@ -260,7 +265,7 @@ class AboutUs extends React.Component {
                       </Col>
                       <Col className="about-us-image" lg={5}>
                         <Image
-                          src={require("./images/fall-2019-general-meeting.jpg")}
+                          src={FallGeneralMeeting} alt = "Fall General Meeting Photo"
                           fluid
                         />
                       </Col>
@@ -269,7 +274,7 @@ class AboutUs extends React.Component {
                 </Accordion.Collapse>
               </Card>
 
-              <Card>
+              <Card className="aboutme-card">
                 <Accordion.Toggle
                   className="accordian-container"
                   as={Card.Header}
@@ -283,7 +288,7 @@ class AboutUs extends React.Component {
                 </Accordion.Toggle>
 
                 <Accordion.Collapse eventKey="3">
-                  <Card.Body>
+                  <Card.Body className="about-card">
                     <Row className="info-row">
                       <Col className="info-col" lg={6}>
                         <div className="info-content-container">
@@ -296,7 +301,7 @@ class AboutUs extends React.Component {
                               Feel free to take a look at our Constitution:
                             </li>
                             <Button
-                              href="https://drive.google.com/file/d/1IyTQtJmeOupbVVq_zp9Fdr-0k4jyDHSa/view?usp=sharing"
+                              href={constitution}
                               target="_blank"
                             >
                               Constitution
@@ -305,7 +310,8 @@ class AboutUs extends React.Component {
                         </div>
                       </Col>
                       <Col className="about-us-image" lg={4}>
-                        <Image src={require("./images/logo.png")} fluid />
+                        <Image src={ConstitutionLogo} alt = "This is the Constitution Logo"
+                        fluid />
                       </Col>
                     </Row>
                   </Card.Body>

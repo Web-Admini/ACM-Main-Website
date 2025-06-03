@@ -28,7 +28,7 @@
 #aboutus-header-title {
   position: absolute;
   z-index: 1;
-  font-size: 5rem;
+  font-size: 3rem;
   top: 30%;
   left: 10%;
 }
@@ -51,6 +51,13 @@
 
   text-align: left;
   padding-top: 32vh;
+}
+.about-card{
+  background-color: #1f1f1f;
+}
+
+.aboutme-card{
+  background-color: #1f1f1f;
 }
 
 .header-container {
