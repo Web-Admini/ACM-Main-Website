@@ -10,7 +10,7 @@
 #project-header-title {
   position: absolute;
   z-index: 1;
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   top: 30%;
   left: 10%;
 }
@@ -238,7 +238,7 @@ iframe[src*="youtube"] {
   color: black !important;
 }
 
-.card-title {
+.titlecard  {
   border: 3px solid black;
   border-radius: 4em;
   width: 50%;

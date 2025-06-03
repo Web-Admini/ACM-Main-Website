@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -21,6 +21,14 @@ import Programs from "./components/programs/Programs";
 import FooterCarousel from "./components/footercarousel/FooterCarousel.js";
 import Success from "./components/membership/CheckoutComponents/Success.js";
 import Portal from "./components/portal/Portal.js";
+import NewBoard from "./components/board/NewBoard";
+import ACM_Login from "./components/login/ACM_Login.js";
+import Admin from "./components/admin/Admin";
+import { Navbar } from "react-bootstrap";
+
+import ProjectsAdmin from "./components/admin/projectsAdmin/ProjectsAdmin";
+import BoardAdmin from "./components/admin/boardAdmin/BoardAdmin";
+import EventsAdmin from "./components/admin/eventsAdmin/EventsAdmin";
 
 class App extends React.Component {
   constructor(props) {
@@ -59,34 +67,58 @@ class App extends React.Component {
   }
   render() {
     const SuccessPage = () => <Route path="/Success" component={Success} />;
+
+    const AdminContainer = () => (
+      <>
+        <Route exact path="/ACM_admin" component={Admin} />
+        <Route path="/login" component={ACM_Login} />
+        <Route path="/ACM_admin/projects" component={ProjectsAdmin} />
+        <Route path="/ACM_admin/events" component={EventsAdmin} />
+        <Route path="/ACM_admin/board" component={BoardAdmin} />
+      </>
+    );
+    const DefaultContainer = () => (
+      <>
+        <Navi />
+        <Route exact path="/" component={Home} />
+        {/*<Route exact path='/' render={() => <Body state={this.state}/>}/>*/}
+        {/*<Route path="/sponsor" component={Sponsor} />*/}
+
+        <Route path="/aboutus" component={AboutUs} />
+        <Route path="/calendar" component={Calendar} />
+        <Route path="/membership" component={Membership} />
+        <Route path="/faq" component={FAQ} />
+        <Route path="/contactus" component={ContactUs} />
+        <Route path="/events" component={Events} />
+        <Route path="/projects" component={Projects} />
+        <Route path="/professional" component={Professional} />
+        <Route path="/board" component={NewBoard} />
+        <Route path="/programs" component={Programs} />
+        <Route path="/portal" component={Portal} />
+        <Route path="/Success" component={SuccessPage} />
+        <Route
+          path="/discord"
+          component={() => {
+            window.location = "https://discord.com/invite/wX58JRv";
+            return null;
+          }}
+        />
+
+        <FooterCarousel />
+      </>
+    );
     return (
       <div>
         <BrowserRouter>
-          <Navi />
-          <Route exact path="/" component={Home} />
-          {/*<Route exact path='/' render={() => <Body state={this.state}/>}/>*/}
-          {/*<Route path="/sponsor" component={Sponsor} />*/}
-          <Route path="/aboutus" component={AboutUs} />
-          <Route path="/calendar" component={Calendar} />
-          <Route path="/membership" component={Membership} />
-          <Route path="/faq" component={FAQ} />
-          <Route path="/contactus" component={ContactUs}/>
-          <Route path="/events" component={Events} />
-          <Route path="/projects" component={Projects} />
-          <Route path="/professional" component={Professional} />
-          <Route path="/board" component={Board} />
-          <Route path="/programs" component={Programs} />
-          <Route path="/portal" component={Portal} />
-          <Route path="/Success" component={SuccessPage} />
-          <Route
-            path="/discord"
-            component={() => {
-              window.location = "https://discord.com/invite/wX58JRv";
-              return null;
-            }}
-          />
+          <Switch>
+            <Route
+              exact
+              path={["/login", "/ACM_admin*"]}
+              component={AdminContainer}
+            />
+            <Route component={DefaultContainer} />
+          </Switch>
         </BrowserRouter>
-        <FooterCarousel />
       </div>
     );
   }

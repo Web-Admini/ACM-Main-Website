@@ -10,6 +10,7 @@ import {
 
 import "bootstrap/dist/css/bootstrap.css";
 class FooterCarousel extends React.Component {
+
   render() {
     return (
       <div className="container top-container">
@@ -69,8 +70,6 @@ class FooterCarousel extends React.Component {
               Contact us: <b>acm.calstatela@gmail.com</b>
               <br></br>
               {/* Office hours: E&T C-245 3PM-4PM every <b>Thursday</b> */}
-              There will be no office hours
-              <br></br>
               <br></br>
               <span className="footer-catchy-text">
                 It's not a bug.{" "}
